@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
 #endif
 
 #ifdef AM_USING_QT5
+
     QGuiApplication app(argc,argv);
 #endif
 
@@ -51,8 +52,10 @@ int main(int argc, char *argv[]) {
 #endif
 
 #ifdef AM_USING_QUICK
-    qDebug() << 123;
-    return EXIT_FAILURE;
+    QQuickView view;
+    view.setSource(QUrl("qrc:/view.ui.qml"));
+
+    view.show();
 #endif
 
     int return_code = app.exec();

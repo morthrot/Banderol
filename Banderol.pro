@@ -15,6 +15,8 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     use_quick {
         DEFINES += AM_USING_QUICK
         QT += quick
+
+        RESOURCES += quick.qrc
         }
     }
 else {
@@ -38,7 +40,7 @@ HEADERS			+= stable.h \
 SOURCES			+= Main.cpp \
                            Network.cpp
 
-RESOURCES		= main.qrc
+RESOURCES		+= main.qrc
 win32:RC_FILE		+= metainfo.rc
 macx:ICON		+= icon.icns
 
