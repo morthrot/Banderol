@@ -40,9 +40,9 @@ int main(int argc, char *argv[]) {
     nick = QInputDialog::getText(NULL,"Вход","Введите погоняло:",QLineEdit::Normal,nick);
     if(nick.isEmpty() == true) { return EXIT_FAILURE; }
     
-    Widget widget(nick);    
-    QObject::connect(&network,SIGNAL(recievedPacket(QVariantMap)),&widget,SLOT(recievePacket(QVariantMap)));
-    QObject::connect(&widget,SIGNAL(generatedPacket(QVariantMap)),&network,SLOT(sendPacket(QVariantMap)));
+    Widget widget(nick);
+    QObject::connect(&network,SIGNAL(recievedMessage(QString,QString)),&widget,SLOT(recieveMessage(QString,QString)));
+    QObject::connect(&widget,SIGNAL(generatedMessage(QString,QString)),&network,SLOT(sendMessage(QString,QString)));
     
     widget.show();
     

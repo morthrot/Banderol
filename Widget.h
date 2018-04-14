@@ -13,7 +13,6 @@
 class Widget : public QWidget {
     Q_OBJECT
 private:
-    unsigned int _uid;
     Ui::Widget ui;
     QSystemTrayIcon * _tray;
 public:
@@ -24,9 +23,9 @@ public slots:
     void processInterface(void);
 
     void sendMessage(void);
-    void recievePacket(QVariantMap map);
+    void recieveMessage(const QString & nick,const QString & message);
 signals:
-    void generatedPacket(QVariantMap);
+    void generatedMessage(QString,QString); // nick, message
     };
 
 #endif /* _WIDGET_H */

@@ -1,8 +1,6 @@
 #include "Widget.h"
 
 Widget::Widget(QString nick,QWidget * parent) : QWidget(parent) {
-    _uid = rand();
-    
     ui.setupUi(this);
     ui.lNick->setText(nick);
     
@@ -39,32 +37,17 @@ void Widget::sendMessage(void) {
     
     if(nick.isEmpty() == true || message.isEmpty() == true) { return; }
     
-    QVariantMap map;
-    map["uid"] = rand();
-    map["nick"] = nick;
-    map["message"] = message;
-    
-    emit generatedPacket(map);
+    emit generatedMessage(nick,message);
     
     ui.leMessage->clear();
     }
 
-void Widget::recievePacket(QVariantMap map) {
-    if(map.contains("uid") == false) { return; }
-    
-    unsigned int uid = map.value("uid").toUInt();
-    if(uid == _uid) { return; }
-    
-    QString nick = map.value("nick").toString();
+void Widget::recieveMessage(const QString & nick,const QString & message) {
     if(nick.isEmpty() == true) { return; }
-    
-    QString message = map.value("message").toString();
     if(message.isEmpty() == true) { return; }
     
     QString dt = QTime::currentTime().toString("HH:mm:ss");
     
     ui.tbChat->append( QString("<i>%1</i> - <b>%2</b> %3").arg(dt,nick,message) );    
     if(isMinimized() == true) { _tray->showMessage(QString("%1 %2").arg(dt,nick),message); }
-    
-    _uid = uid;
     }
