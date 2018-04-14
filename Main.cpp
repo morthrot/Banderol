@@ -1,10 +1,4 @@
-#include <QtCore>
-#include <QtNetwork>
-#include <QtGui>
-
-#ifdef AM_USING_QT5
-#include <QtWidgets>
-#endif
+#include "stable.h"
 
 #include "Network.h"
 #include "Widget.h"

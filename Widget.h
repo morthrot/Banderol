@@ -1,12 +1,7 @@
 #ifndef _WIDGET_H
 #define	_WIDGET_H
 
-#include <QtCore>
-#include <QtGui>
-
-#ifdef AM_USING_QT5
-#include <QtWidgets>
-#endif
+#include "stable.h"
 
 #include "ui_Widget.h"
 

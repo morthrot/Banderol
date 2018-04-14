@@ -1,8 +1,7 @@
 #ifndef NETWORK_H
 #define	NETWORK_H
 
-#include <QtCore>
-#include <QtNetwork>
+#include "stable.h"
 
 class Network : public QObject {
     Q_OBJECT

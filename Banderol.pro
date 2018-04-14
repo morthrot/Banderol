@@ -7,13 +7,16 @@ else {
     }
 
 TEMPLATE		= app
-CONFIG			+= qt warn_off release
+CONFIG			+= qt warn_off release precompile_header
 CONFIG			-=
 QT			+= network
 
+PRECOMPILED_HEADER	= stable.h
+
 FORMS			= Widget.ui
 
-HEADERS			= Network.h \
+HEADERS			= stable.h \
+			  Network.h \
 			  Widget.h
 
 SOURCES			= Main.cpp \
