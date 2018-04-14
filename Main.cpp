@@ -7,16 +7,13 @@
 #endif
 
 int main(int argc, char *argv[]) {
-#ifdef AM_USING_QT4
+#if defined(AM_USING_QT4)
     QApplication app(argc,argv);
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+#elif defined(AM_USING_QT5)
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QApplication app(argc,argv);
 #endif
-
-#ifdef AM_USING_QT5
-
-    QGuiApplication app(argc,argv);
-#endif
-
     app.setWindowIcon(QIcon(":/icon.png"));
    
     QCoreApplication::setApplicationName("Banderol");

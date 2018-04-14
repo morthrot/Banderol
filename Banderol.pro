@@ -1,4 +1,4 @@
-CONFIG += use_quick
+CONFIG += use_widgets
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     DEFINES += AM_USING_QT5
@@ -19,6 +19,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
         RESOURCES += quick.qrc
         }
     }
+
 else {
     DEFINES += AM_USING_QT4 AM_USING_WIDGETS
 
