@@ -8,7 +8,15 @@
 #include <QtGui>
 
 #ifdef AM_USING_QT5
+
+#ifdef AM_USING_WIDGETS
 #include <QtWidgets>
+#endif
+
+#ifdef AM_USING_QUICK
+#include <QtQuick>
+#endif
+
 #endif
 
 #endif

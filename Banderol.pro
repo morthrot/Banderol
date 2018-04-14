@@ -1,9 +1,28 @@
+CONFIG += use_quick
+
 greaterThan(QT_MAJOR_VERSION, 4) {
-    QT += widgets
     DEFINES += AM_USING_QT5
+
+    use_widgets {
+        DEFINES += AM_USING_WIDGETS
+        QT += widgets
+
+        FORMS += Widget.ui
+        HEADERS += Widget.h
+        SOURCES += Widget.cpp
+        }
+
+    use_quick {
+        DEFINES += AM_USING_QUICK
+        QT += quick
+        }
     }
 else {
-    DEFINES += AM_USING_QT4
+    DEFINES += AM_USING_QT4 AM_USING_WIDGETS
+
+    FORMS += Widget.ui
+    HEADERS += Widget.h
+    SOURCES += Widget.cpp
     }
 
 TEMPLATE		= app
@@ -13,15 +32,11 @@ QT			+= network
 
 PRECOMPILED_HEADER	= stable.h
 
-FORMS			= Widget.ui
+HEADERS			+= stable.h \
+                           Network.h
 
-HEADERS			= stable.h \
-			  Network.h \
-			  Widget.h
-
-SOURCES			= Main.cpp \
-			  Network.cpp \
-			  Widget.cpp
+SOURCES			+= Main.cpp \
+                           Network.cpp
 
 RESOURCES		= main.qrc
 win32:RC_FILE		+= metainfo.rc
