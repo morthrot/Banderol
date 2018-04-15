@@ -32,13 +32,13 @@ int main(int argc, char *argv[]) {
     Network network(service,QHostAddress(target),port);
     bool bind_ok = network.bind();
 
-#ifdef AM_USING_WIDGETS
+#if defined(AM_USING_WIDGETS)
     if(bind_ok == false) {
         QMessageBox::critical(NULL,"Ошибка сети",QString("Ошибка привязки к порту %1").arg(port),"OK");
         return EXIT_FAILURE;
         }
 
-    nick = QInputDialog::getText(NULL,"Вход","Введите погоняло:",QLineEdit::Normal,nick);
+    nick = QInputDialog::getText(NULL,"Вход","Введите погоняло:",QLineEdit::Normal,nick,NULL,Qt::Popup);
     if(nick.isEmpty() == true) { return EXIT_FAILURE; }
     
     Widget widget(nick);
@@ -46,9 +46,7 @@ int main(int argc, char *argv[]) {
     QObject::connect(&widget,SIGNAL(generatedMessage(QString,QString)),&network,SLOT(sendMessage(QString,QString)));
     
     widget.show();
-#endif
-
-#ifdef AM_USING_QUICK
+#elif defined(AM_USING_QUICK)
     QQuickView view;
     view.setSource(QUrl("qrc:/view.ui.qml"));
 

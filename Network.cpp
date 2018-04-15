@@ -44,8 +44,7 @@ void Network::recieveDatagram(void) {
 
         unsigned int uid = map.value("uid").toUInt();
         if(uid == _uid) { continue; }
-
-        _uid = uid;
+        else { _uid = uid; }
 
         QString nick = map.value("nick").toString();
         if(nick.isEmpty() == true) { continue; }
