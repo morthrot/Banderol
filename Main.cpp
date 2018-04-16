@@ -12,7 +12,13 @@ int main(int argc, char *argv[]) {
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #elif defined(AM_USING_QT5)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    
+#if defined(AM_USING_WIDGETS)    
     QApplication app(argc,argv);
+#elif defined(AM_USING_QUICK)
+    QGuiApplication app(argc,argv);
+#endif
+
 #endif
     app.setWindowIcon(QIcon(":/icon.png"));
    
