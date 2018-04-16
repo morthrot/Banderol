@@ -10,7 +10,7 @@ Banderol - свободная программа: вы можете перера
 либо версии 3 лицензии, либо (по вашему выбору) любой более поздней
 версии.
 
-Письмуй распространяется в надежде, что она будет полезной,
+Banderol распространяется в надежде, что она будет полезной,
 но БЕЗО ВСЯКИХ ГАРАНТИЙ; даже без неявной гарантии ТОВАРНОГО ВИДА
 или ПРИГОДНОСТИ ДЛЯ ОПРЕДЕЛЕННЫХ ЦЕЛЕЙ. Подробнее см. в Стандартной
 общественной лицензии GNU.
@@ -27,7 +27,7 @@ it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-Composer is distributed in the hope that it will be useful,
+Banderol is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
