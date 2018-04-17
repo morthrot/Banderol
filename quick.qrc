@@ -2,7 +2,7 @@
 <RCC version="1.0">
     <qresource>
         <file>qtquickcontrols2.conf</file>
-        <file>view.ui.qml</file>
+        <file>view.qml</file>
     </qresource>
 </RCC>
 

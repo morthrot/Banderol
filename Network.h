@@ -60,10 +60,12 @@ public slots:
     bool sendDatagram(const QByteArray & bytes);
     bool sendPacket(const QVariantMap & map);
     bool sendMessage(const QString & nick,const QString & message);
+    bool sendMessage(const QVariant & nick,const QVariant & message);
 signals:
     void recievedDatagram(QByteArray); // bytes
     void recievedPacket(QVariantMap); // map
     void recievedMessage(QString,QString); // nick, message
+    void recievedMessage(QVariant,QVariant); // nick, message
     };
 
 #endif /* NETWORK_H */

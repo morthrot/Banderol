@@ -92,6 +92,7 @@ void Network::recieveDatagram(void) {
         if(message.isEmpty() == true) { continue; }
 
         emit recievedMessage(nick,message);
+        emit recievedMessage(QVariant(nick),QVariant(message));
         }
     }
 
@@ -120,4 +121,8 @@ bool Network::sendMessage(const QString & nick,const QString & message) {
     map["message"] = message;
 
     return sendPacket(map);
+    }
+
+bool Network::sendMessage(const QVariant & nick,const QVariant & message) {
+    return sendMessage(nick.toString(),message.toString());
     }

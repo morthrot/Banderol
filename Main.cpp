@@ -92,10 +92,20 @@ int main(int argc, char *argv[]) {
     
     widget.show();
 #elif defined(AM_USING_QUICK)
-    QQuickView view;
-    view.setSource(QUrl("qrc:/view.ui.qml"));
+    QQmlApplicationEngine engine;
 
-    view.show();
+    QQmlContext * context = engine.rootContext();
+    if(context == NULL) { return EXIT_FAILURE; }
+
+    context->setContextProperty("network",&network);
+
+    engine.load(QUrl("qrc:/view.qml"));
+
+    QObject * root = engine.rootObjects().first();
+    if(root == NULL) { return EXIT_FAILURE; }
+
+    QObject::connect(&network,SIGNAL(recievedMessage(QVariant,QVariant)),root,SLOT(recieveMessage(QVariant,QVariant)));
+    QObject::connect(root,SIGNAL(generatedMessage(QVariant,QVariant)),&network,SLOT(sendMessage(QVariant,QVariant)));
 #endif
 
     int return_code = app.exec();
