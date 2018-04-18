@@ -1,4 +1,4 @@
-CONFIG += use_widgets
+CONFIG += use_quick
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     DEFINES += AM_USING_QT5

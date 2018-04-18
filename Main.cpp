@@ -104,6 +104,9 @@ int main(int argc, char *argv[]) {
     QObject * root = engine.rootObjects().first();
     if(root == NULL) { return EXIT_FAILURE; }
 
+    QVariant init_result;
+    QMetaObject::invokeMethod(root,"init",Q_RETURN_ARG(QVariant,init_result),Q_ARG(QVariant,bind_ok),Q_ARG(QVariant,nick));
+
     QObject::connect(&network,SIGNAL(recievedMessage(QVariant,QVariant)),root,SLOT(recieveMessage(QVariant,QVariant)));
     QObject::connect(root,SIGNAL(generatedMessage(QVariant,QVariant)),&network,SLOT(sendMessage(QVariant,QVariant)));
 #endif
