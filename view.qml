@@ -1,6 +1,5 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Dialogs 1.2
+import QtQuick 2.10
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
 ApplicationWindow {
@@ -14,16 +13,19 @@ ApplicationWindow {
         taChat.clear()
         updateTime()
         lNick.text = nick
+        processInterface()
 
-        if(bind_ok === false) {
-            bindDialog.open()
-        }
-
-        nickDialog.open()
+        if(bind_ok === false) { bindDialog.open() }
+        else { nickDialog.open() }
     }
 
     Dialog {
         id: bindDialog
+        modal: true
+        standardButtons: Dialog.Ok
+
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
 
         title: "Ошибка сети"
         Label { text: "Ошибка привязки к порту" }
@@ -33,16 +35,24 @@ ApplicationWindow {
 
     Dialog {
         id: nickDialog
+        modal: true
+        standardButtons: Dialog.Ok | Dialog.Cancel
+
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
 
         title: "Вход"
+
         ColumnLayout {
             spacing: 20
             anchors.fill: parent
+
             Label {
                 elide: Label.ElideRight
                 text: "Введите погоняло:"
                 Layout.fillWidth: true
             }
+
             TextField {
                 id: dialog_nick
                 text: lNick.text
@@ -56,19 +66,23 @@ ApplicationWindow {
 
     function sendMessage() {
         generatedMessage(lNick.text,tfMessage.text)
-        tfMessage.text = ""
+        tfMessage.clear()
     }
 
     signal generatedMessage(var nick,var message)
 
     function recieveMessage(nick,message) {
         var dt = new Date()
-        taChat.append(dt.toTimeString() + " <b>" + nick + "</b> " + message)
+        taChat.append("<i>" + dt.toTimeString() + "</i> - <b>" + nick + "</b> " + message)
     }
 
     function updateTime() {
         var dt = new Date()
         lTime.text = dt.toTimeString();
+    }
+
+    function processInterface() {
+        bSend.enabled = (tfMessage.text != "")
     }
 
     Timer {
@@ -81,15 +95,17 @@ ApplicationWindow {
 
     Button {
         id: bSend
+
         x: 458
         y: 272
         width: 128
         height: 48
-        text: qsTr("Отправить")
+        text: "Отправить"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 6
         anchors.right: parent.right
         anchors.rightMargin: 10
+
         onClicked: sendMessage()
     }
 
@@ -97,7 +113,7 @@ ApplicationWindow {
         id: lNick
         y: 272
         height: 48
-        text: qsTr("Пользователь")
+        text: "Пользователь"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 6
         anchors.left: lTime.right
@@ -110,7 +126,7 @@ ApplicationWindow {
         id: tfMessage
         y: 272
         height: 48
-        text: qsTr("")
+        text: ""
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 6
         anchors.right: bSend.left
@@ -119,6 +135,7 @@ ApplicationWindow {
         anchors.leftMargin: 6
         placeholderText: "Сообщение для отправки"
 
+        onTextChanged: processInterface()
         onAccepted: sendMessage()
     }
 
@@ -126,7 +143,7 @@ ApplicationWindow {
         id: lTime
         y: 272
         height: 48
-        text: qsTr("00:00:00")
+        text: "00:00:00"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 6
         anchors.left: parent.left
@@ -153,7 +170,3 @@ ApplicationWindow {
         }
     }
 }
-
-
-
-
