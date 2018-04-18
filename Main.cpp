@@ -112,6 +112,12 @@ int main(int argc, char *argv[]) {
 #endif
 
     int return_code = app.exec();
+
+#if defined(AM_USING_QUICK)
+    QVariant nick_result;
+    QMetaObject::invokeMethod(root,"getNick",Q_RETURN_ARG(QVariant,nick_result));
+    nick = nick_result.toString();
+#endif
     
     settings.setValue("Service",service);
     settings.setValue("Target",target);

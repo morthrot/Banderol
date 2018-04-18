@@ -8,6 +8,8 @@ ApplicationWindow {
     visible: true
     height: 326
     title: "Бандероль"
+    minimumWidth: 386
+    minimumHeight: 256
 
     function init(bind_ok,nick) {
         taChat.clear()
@@ -31,12 +33,13 @@ ApplicationWindow {
         Label { text: "Ошибка привязки к порту" }
 
         onAccepted: Qt.quit()
+        onRejected: Qt.quit()
     }
 
     Dialog {
         id: nickDialog
         modal: true
-        standardButtons: Dialog.Ok | Dialog.Cancel
+        standardButtons: Dialog.Ok
 
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
@@ -83,6 +86,10 @@ ApplicationWindow {
 
     function processInterface() {
         bSend.enabled = (tfMessage.text != "")
+    }
+
+    function getNick() {
+        return lNick.text
     }
 
     Timer {
